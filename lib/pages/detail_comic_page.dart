@@ -48,7 +48,7 @@ class DetailComicPage extends StatelessWidget {
           '${this.comic.name?? ''}',
           style: TextStyle(
             color: Colors.white,
-            fontSize: responsive.hp(2.5)
+            fontSize: responsive.ip(2)
           ),
         ),
         background: FadeInImage(
@@ -74,11 +74,13 @@ class DetailComicPage extends StatelessWidget {
               child: Image(
                 image: NetworkImage(this.comic.image.mediumUrl),
                 height: responsive.hp(20),
+                width: responsive.wp(30),
+                fit: BoxFit.cover,
               ),
             ),
           ),
           SizedBox(
-            width: responsive.hp(3),
+            width: responsive.wp(4),
           ),
           Flexible(
             child: Column(
@@ -87,14 +89,15 @@ class DetailComicPage extends StatelessWidget {
                 Text(
                   '${this.comic.name}',
                   style: TextStyle(
-                    fontSize: responsive.hp(4)
+                    fontSize: responsive.ip(2),
+                    fontWeight: FontWeight.bold
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   'Publicado el: $publishdate',
                   style: TextStyle(
-                    fontSize: responsive.hp(2)
+                    fontSize: responsive.ip(1.5)
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -109,7 +112,7 @@ class DetailComicPage extends StatelessWidget {
   Widget _description(BuildContext context){
     final Responsive responsive = new Responsive.of(context);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: responsive.hp(2), vertical: responsive.hp(3)),
+      padding: EdgeInsets.symmetric(horizontal: responsive.ip(2), vertical: responsive.ip(3)),
       child: Html(
         data: this.comic.description?? '',
       ),

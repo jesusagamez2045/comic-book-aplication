@@ -19,7 +19,7 @@ class ComicCard extends StatelessWidget {
         Get.to(DetailComicPage(comic: this.comic));
       },
       child: Container(
-        margin: EdgeInsets.only(left: responsive.hp(3)),
+        margin: EdgeInsets.only(left: responsive.ip(2)),
         height: double.infinity,
         child: Column(
           children: <Widget>[
@@ -38,12 +38,12 @@ class ComicCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: responsive.hp(2),
+              height: responsive.ip(2),
             ),
             Text(
               '${this.comic.name?? ''}',
               style: TextStyle(
-                fontSize: responsive.hp(3),
+                fontSize: responsive.ip(2),
               ),
               overflow: TextOverflow.ellipsis,
             )
