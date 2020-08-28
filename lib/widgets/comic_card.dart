@@ -1,6 +1,8 @@
 import 'package:comicbook/models/comic_model.dart';
+import 'package:comicbook/pages/detail_comic_page.dart';
 import 'package:comicbook/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ComicCard extends StatelessWidget {
@@ -12,33 +14,41 @@ class ComicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = new Responsive.of(context);
-    return Container(
-      margin: EdgeInsets.only(left: responsive.hp(3)),
-      height: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/images/no-image.jpg'), 
-                image: NetworkImage(this.comic.image.mediumUrl),
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )
+    return GestureDetector(
+      onTap: (){
+        Get.to(DetailComicPage(comic: this.comic));
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: responsive.hp(3)),
+        height: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Hero(
+                tag: '${this.comic.id}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: FadeInImage(
+                    placeholder: AssetImage('assets/images/no-image.jpg'), 
+                    image: NetworkImage(this.comic.image.mediumUrl),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  )
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: responsive.hp(2),
-          ),
-          Text(
-            '${this.comic.name}',
-            style: TextStyle(
-              fontSize: responsive.hp(3),
+            SizedBox(
+              height: responsive.hp(2),
             ),
-            overflow: TextOverflow.ellipsis,
-          )
-        ],
+            Text(
+              '${this.comic.name?? ''}',
+              style: TextStyle(
+                fontSize: responsive.hp(3),
+              ),
+              overflow: TextOverflow.ellipsis,
+            )
+          ],
+        ),
       ),
     );
   }
