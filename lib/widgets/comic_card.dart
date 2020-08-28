@@ -1,8 +1,13 @@
+import 'package:comicbook/models/comic_model.dart';
 import 'package:comicbook/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 
 class ComicCard extends StatelessWidget {
+
+  final Comic comic;
+
+  const ComicCard({@required this.comic});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class ComicCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               child: FadeInImage(
                 placeholder: AssetImage('assets/images/no-image.jpg'), 
-                image: NetworkImage('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                image: NetworkImage(this.comic.image.mediumUrl),
                 fit: BoxFit.cover,
                 width: double.infinity,
               )
@@ -27,7 +32,7 @@ class ComicCard extends StatelessWidget {
             height: responsive.hp(2),
           ),
           Text(
-            'el titulo',
+            '${this.comic.name}',
             style: TextStyle(
               fontSize: responsive.hp(3),
             ),

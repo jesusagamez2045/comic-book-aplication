@@ -13,17 +13,17 @@ class ComicService{
   final String _apiKey = "e952c7b1cceaaaf087a9710fadf913ca54e17877";
   final Dio _dio = new Dio(BaseOptions(baseUrl: 'https://comicvine.gamespot.com/api'));
 
-  Future<List<ComicModel>> getLastComics() async{
+  Future<List<Comic>> getLastComics(int limit, int offset) async{
     try {
-      final response = await _dio.get('/volumes/?api_key=${this._apiKey}&limit=10&format=json');
-      print(response.data);
+      final response = await _dio.get('/volumes/?api_key=${this._apiKey}&limit=$limit&offset=$offset&sort=date_added:desc&format=json');
       if(response.statusCode == 200){
-
-        return [];
+        var comic = comicModelFromJson(response.data);
+        return comic.results;
       }else{
         return null;
       }
     } catch (e) {
+      print(e);
       return null;
     }
   }

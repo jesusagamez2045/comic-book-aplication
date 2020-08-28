@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-ComicModel comicModelFromJson(String str) => ComicModel.fromJson(json.decode(str));
+ComicModel comicModelFromJson(Map<String, dynamic> str) => ComicModel.fromJson(str);
 
 String comicModelToJson(ComicModel data) => json.encode(data.toJson());
 
@@ -130,8 +130,7 @@ class Image {
     this.superUrl,
     this.thumbUrl,
     this.tinyUrl,
-    this.originalUrl,
-    this.imageTags,
+    this.originalUrl
   });
 
   String iconUrl;
@@ -143,7 +142,6 @@ class Image {
   String thumbUrl;
   String tinyUrl;
   String originalUrl;
-  ImageTags imageTags;
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
     iconUrl: json["icon_url"],
@@ -154,8 +152,7 @@ class Image {
     superUrl: json["super_url"],
     thumbUrl: json["thumb_url"],
     tinyUrl: json["tiny_url"],
-    originalUrl: json["original_url"],
-    imageTags: imageTagsValues.map[json["image_tags"]],
+    originalUrl: json["original_url"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -167,27 +164,6 @@ class Image {
     "super_url": superUrl,
     "thumb_url": thumbUrl,
     "tiny_url": tinyUrl,
-    "original_url": originalUrl,
-    "image_tags": imageTagsValues.reverse[imageTags],
+    "original_url": originalUrl
   };
-}
-
-enum ImageTags { ALL_IMAGES }
-
-final imageTagsValues = EnumValues({
-  "All Images": ImageTags.ALL_IMAGES
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    if (reverseMap == null) {
-        reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
 }
