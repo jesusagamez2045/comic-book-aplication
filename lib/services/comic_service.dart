@@ -28,4 +28,18 @@ class ComicService{
     }
   }
 
+    Future<List<Comic>> getFilterComics(String search) async{
+    try {
+      final response = await _dio.get('/volumes/?api_key=${this._apiKey}&filter=name:$search&sort=date_added:desc&format=json');
+      if(response.statusCode == 200){
+        var comic = comicModelFromJson(response.data);
+        return comic.results;
+      }else{
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
 }

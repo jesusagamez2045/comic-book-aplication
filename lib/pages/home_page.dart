@@ -1,5 +1,6 @@
 import 'package:comicbook/controllers/home_page_controller.dart';
 import 'package:comicbook/models/comic_model.dart';
+import 'package:comicbook/search/search_delegate.dart';
 import 'package:comicbook/utils/responsive.dart';
 import 'package:comicbook/widgets/comic_card.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,28 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomePageController>(
       init: _homePageController,
       builder: (_) => Scaffold(
+        appBar: AppBar(
+          centerTitle: false,
+          title: Text(
+            'Last Comics',
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                Icons.search
+              ), 
+              onPressed: (){
+                showSearch(context: context, delegate: DataSearch());
+              }
+            )
+          ],
+          backgroundColor: Colors.indigo,
+          elevation: 0,
+        ),
         body: SafeArea(
           child: Container(
             width: double.infinity,
@@ -26,29 +49,6 @@ class HomePage extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   height: responsive.hp(3),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: responsive.hp(3)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'Last Comics',
-                        style: TextStyle(
-                          fontSize: responsive.hp(5),
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: responsive.hp(5),
-                        icon: Icon(
-                          Icons.search
-                        ), 
-                        onPressed: (){}
-                      )
-                    ],
-                  ),
                 ),
                 SizedBox(
                   height: responsive.hp(9),

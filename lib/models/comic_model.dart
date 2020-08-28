@@ -57,7 +57,7 @@ class Comic {
 
   factory Comic.fromJson(Map<String, dynamic> json) => Comic(
     aliases: json["aliases"],
-    apiDetailUrl: json["api_detail_url"],
+    apiDetailUrl: (json["api_detail_url"] != null) ? json["api_detail_url"]  : null,
     countOfIssues: json["count_of_issues"],
     dateAdded: DateTime.parse(json["date_added"]),
     dateLastUpdated: DateTime.parse(json["date_last_updated"]),
@@ -66,9 +66,9 @@ class Comic {
     firstIssue: (json["first_issue"] != null) ? FirstIssue.fromJson(json["first_issue"]) : null,
     id: json["id"],
     image: Image.fromJson(json["image"]),
-    lastIssue: (json["first_issue"] != null) ? FirstIssue.fromJson(json["last_issue"]) : null,
+    lastIssue: (json["last_issue"] != null) ? FirstIssue.fromJson(json["last_issue"]) : null,
     name: json["name"],
-    publisher: (json["first_issue"] != null) ? FirstIssue.fromJson(json["publisher"]) : null,
+    publisher: (json["publisher"] != null) ? FirstIssue.fromJson(json["publisher"]) : null,
     siteDetailUrl: json["site_detail_url"],
     startYear: json["start_year"],
   );
@@ -106,7 +106,7 @@ class FirstIssue {
   String issueNumber;
 
   factory FirstIssue.fromJson(Map<String, dynamic> json) => FirstIssue(
-    apiDetailUrl: json["api_detail_url"],
+    apiDetailUrl: (json["api_detail_url"] != null) ? json["api_detail_url"] : null,
     id: json["id"],
     name: json["name"] == null ? null : json["name"],
     issueNumber: json["issue_number"] == null ? null : json["issue_number"],
